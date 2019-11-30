@@ -8,8 +8,8 @@ Gem::Specification.new do |spec|
   spec.authors       = ["Carlos Quinones"]
   spec.email         = ["cquinones100@gmail.com"]
 
-  spec.summary       = 'A collection of useful scripts for ruby and rail development'
-  spec.description   = 'A collection of useful scripts for ruby and rail development'
+  spec.summary       = 'Register and run scripts for ruby and rails development'
+  spec.description   = 'Register and run scripts for ruby and rails development, with some defaults.'
 
   # Specify which files should be added to the gem when it is released.
   # The `git ls-files -z` loads the files in the RubyGem that have been added into git.
