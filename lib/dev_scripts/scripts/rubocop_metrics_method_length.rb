@@ -93,12 +93,12 @@ DevScripts::Script.define_script :rubocop_metrics_method_length do
     def run
       all_lines.insert(
         method_reader.first_line,
-        "#{method_reader.indentation}# rubcop:disable Metrics/MethodLength\n"
+        "#{method_reader.indentation}# rubocop:disable Metrics/MethodLength\n"
       )
 
       all_lines.insert(
         method_reader.last_line + 2,
-        "#{method_reader.indentation}# rubcop:enable Metrics/MethodLength\n"
+        "#{method_reader.indentation}# rubocop:enable Metrics/MethodLength\n"
       )
 
       File.open(file_path, 'w') { |file| file.write(all_lines.join('')) }
