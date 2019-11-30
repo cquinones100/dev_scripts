@@ -1,4 +1,4 @@
-require "./lib/dev_scripts/version"
+require "dev_scripts/version"
 
 module DevScripts
   class Error < StandardError; end
@@ -93,7 +93,7 @@ module DevScripts
   end
 end
 
-require './scripts/open_spec_file.rb'
-require './scripts/rubocop_metrics_method_length.rb'
+require 'dev_scripts/scripts/open_spec_file'
+require 'dev_scripts/scripts/rubocop_metrics_method_length'
 
 DevScripts::Script.execute(ARGV)
