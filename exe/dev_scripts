@@ -1,3 +1,3 @@
 #!/usr/bin/env ruby
 
-require './lib/dev_scripts'
+require 'dev_scripts'
