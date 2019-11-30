@@ -60,7 +60,7 @@ module DevScripts
     end
 
     def execute(&block)
-      instance_eval(&before_block)
+      instance_eval(&before_block) if before_block
 
       instance_eval(&block)
     end
@@ -94,5 +94,6 @@ module DevScripts
 end
 
 require './scripts/open_spec_file.rb'
+require './scripts/rubocop_metrics_method_length.rb'
 
 DevScripts::Script.execute(ARGV)
