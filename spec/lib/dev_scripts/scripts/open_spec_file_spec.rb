@@ -47,6 +47,16 @@ RSpec.describe :open_spec_file do
         DevScripts::Script.execute([described_class, file_name])
       end
     end
+
+    context 'when already in a spec file' do
+      it do
+        expect_any_instance_of(DevScripts::Script)
+          .to receive(:print_message)
+          .with(ALREADY_IN_SPEC_FILE_MESSAGE)
+
+        DevScripts::Script.execute([described_class, spec_file_name])
+      end
+    end
   end
 
   describe 'file content' do

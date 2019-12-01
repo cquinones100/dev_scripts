@@ -25,9 +25,11 @@ module DevScripts
         script_to_execute = scripts.find { |script| script.name == script_name.to_sym }
 
         if script_to_execute
-          script_to_execute.run(rest) 
-
-          scripts[scripts.index(script_to_execute)] = script_to_execute.duplicate
+          begin
+            script_to_execute.run(rest) 
+          ensure
+            scripts[scripts.index(script_to_execute)] = script_to_execute.duplicate
+          end
         else
           raise ScriptNotRegistered.new(script_name)
         end
@@ -100,6 +102,10 @@ module DevScripts
 
     def open_file_in_editor(file_path_to_open)
       system "code -r #{file_path_to_open}"
+    end
+
+    def print_message(message)
+      puts message
     end
   end
 end
