@@ -45,7 +45,7 @@ DevScripts::Script.define_script :open_spec_file do
     if !file_exists?
       create_file_in_editor spec_file_path do
         <<-RUBY
-Rspec.describe #{constant_name} do
+RSpec.describe #{constant_name} do
 end
         RUBY
       end
