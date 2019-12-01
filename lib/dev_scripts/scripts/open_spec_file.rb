@@ -1,3 +1,5 @@
+require 'dev_scripts/script'
+
 DevScripts::Script.define_script :open_spec_file do
   args :file_path 
 
@@ -33,16 +35,12 @@ DevScripts::Script.define_script :open_spec_file do
       .join('::')
   end
 
-  before do
+  execute do
     if file_exists?
       puts 'file already exists, opening file'
     else
       puts 'file does not exist, writing a new file'
-    end
-  end
 
-  execute do
-    if !file_exists?
       create_file_in_editor spec_file_path do
         <<-RUBY
 RSpec.describe #{constant_name} do
