@@ -6,6 +6,10 @@
 /pkg/
 /spec/reports/
 /tmp/
+/dev_scripts/
+/lib/dev_scripts/scripts/open_controller_file.rb
+/lib/dev_scripts/scripts/open_shared_context_file.rb
+/lib/dev_scripts/scripts/remove_file.rb
 
 # rspec failure tracking
 .rspec_status

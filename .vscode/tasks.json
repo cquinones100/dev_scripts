@@ -1,0 +1,11 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "open spec",
+      "type": "shell",
+      "command": "dev_scripts open_spec_file ${relativeFile}",
+      "problemMatcher": []
+    }
+  ]
+}
