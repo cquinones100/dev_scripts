@@ -6,6 +6,12 @@
       "type": "shell",
       "command": "dev_scripts open_spec_file ${relativeFile}",
       "problemMatcher": []
+    },
+    {
+      "label": "expand block",
+      "type": "shell",
+      "command": "dev_scripts expand_block ${relativeFile} ${lineNumber}",
+      "problemMatcher": []
     }
   ]
 }
