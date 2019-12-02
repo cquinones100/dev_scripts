@@ -4,7 +4,7 @@ require 'dev_scripts/support/method_call'
 
 module DevScripts
   module Support
-    class BlockExpander < String
+    class ExpandedBlock < String
       def initialize(line:)
         parsed = Parser::CurrentRuby.parse(line).children
         spacing = line.match(/\A\s*/)[0]
