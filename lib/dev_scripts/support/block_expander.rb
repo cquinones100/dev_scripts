@@ -1,50 +1,25 @@
+require 'parser/current'
+require 'dev_scripts/support/block'
+require 'dev_scripts/support/method_call'
+
 module DevScripts
   module Support
-    class BlockExpander
-
+    class BlockExpander < String
       def initialize(line:)
-        @line = line
-        @body = line.match(/\{.*}\s*\n*\z/)&.send(:[], 0)
-        @spacing = line.match(/\A\s*/)&.send(:[], 0)
-        @argument = line.match(/\|\w+(,\w+)*\|/)&.send(:[], 0)
-      end
+        parsed = Parser::CurrentRuby.parse(line).children
+        spacing = line.match(/\A\s*/)[0]
+        end_spacing = line.match(/\s*\z/)[0]
+        block_string = DevScripts::Support::Block.new(parsed[1], parsed[2])
+        block_lines = block_string.split("\n")
 
-      def run
-        line_one + line_two + line_three  
-      end
-
-      private 
-
-      attr_reader :method_call, :body, :spacing, :argument, :line
-
-      def method_call
-        line.split('').each_with_object('') do |character, new_line|
-          return new_line if character == '{'
-
-          new_line << character
-        end
-      end
-
-      def new_body
-        body
-          .gsub('{', 'do')
-          .gsub(/\|\w+(,\w+)*\|/) { |match| "#{match}\n#{spacing}" }
-          .gsub('}', )
-      end
-
-      def line_one
-        method_call.gsub(/\s*\z/, '') + " do#{argument ? ' ' + argument : ''}\n"
-      end
-
-      def line_two
-        spacing +
-        '  ' +
-        body.gsub(/\A{\s*(\|\w+(,\w+)*\|)*\s*/, '').gsub(/\s*}\s*\z/, '') +
-        "\n"
-      end
-
-      def line_three
-        spacing + body.match(/}\s*/)[0].gsub('}', 'end')
+        self << spacing + DevScripts::Support::MethodCall.new(parsed[0])
+        self << ' '
+        self << block_lines[0]
+        self << "\n"
+        self << spacing + block_lines[1]
+        self << "\n"
+        self << spacing + block_lines[2]
+        self << end_spacing
       end
     end
   end

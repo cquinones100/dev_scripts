@@ -1,18 +1,18 @@
 require 'dev_scripts/support/block_expander'
 
 RSpec.describe DevScripts::Support::BlockExpander do
-  describe '#run' do
-    subject { described_class.new(line: line).run }
+  describe 'self' do
+    subject { described_class.new(line: line) }
 
     context 'when there is a block argument' do
       let(:line) do
-        "  things.each { |thing| do_something(thing) }\n"
+        "  things.all.each { |thing| do_something(thing, thing2) }\n"
       end
 
       let(:expected_block) do
         <<-RUBY
-  things.each do |thing|
-    do_something(thing)
+  things.all.each do |thing|
+    do_something(thing, thing2)
   end
         RUBY
       end
