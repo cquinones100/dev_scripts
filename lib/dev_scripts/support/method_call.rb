@@ -45,6 +45,12 @@ module DevScripts
           "#{arg.children[0]}"
         when :send
           "#{arg.children[1]}"
+        when :hash
+          arg_string(arg.children[0])
+        when :pair
+          key, value = arg.children
+
+          "#{key.children.first}: #{value.children.last}"
         end
       end
     end

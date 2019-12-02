@@ -37,19 +37,21 @@ RSpec.describe DevScripts::Support::ExpandedBlock do
     end
 
     context 'when there is no method call in the body of the block' do
-      let(:line) do
-        "  let(:thing) { :do_something }\n"
-      end
+      context do
+        let(:line) do
+          "  subject { described_class.new(line: line) }\n"
+        end
 
-      let(:expected_block) do
-        <<-RUBY
-  let(:thing) do
-    :do_something
+        let(:expected_block) do
+          <<-RUBY
+  subject do
+    described_class.new(line: line)
   end
-        RUBY
-      end
+         RUBY
+       end
 
-      it { is_expected.to eq expected_block }
+        it { is_expected.to eq expected_block }
+       end
     end
   end
 end
