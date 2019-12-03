@@ -1,9 +1,10 @@
 module DevScripts
   module Support
     class MethodCall < String
-      attr_reader :receiver, :invocation, :args
+      attr_reader :receiver, :invocation, :args, :ast_node
 
       def initialize(ast_node)
+        @ast_node = ast_node
         current_receiver, @invocation, *@args = ast_node.children
 
         invocation_stack = [invocation_with_args]
@@ -38,7 +39,7 @@ module DevScripts
         when :sym
           ":#{arg.children[0]}"
         when :str
-          "#{arg.children[0]}"
+          "'#{arg.children[0]}'"
         when :int
           "#{arg.children[0].to_i}"
         when :lvar
@@ -46,11 +47,15 @@ module DevScripts
         when :send
           "#{arg.children[1]}"
         when :hash
-          arg_string(arg.children[0])
+          arg.children.each_with_object('').with_index do |(kwarg, string), index|
+            string << arg_string(kwarg)
+
+            string << ', ' if index < arg.children.size - 1
+          end
         when :pair
           key, value = arg.children
 
-          "#{key.children.first}: #{value.children.last}"
+          "#{key.children.first}: " + arg_string(value)
         end
       end
     end
