@@ -1,8 +1,8 @@
 RSpec.describe :open_spec_file do
   load_file "dev_scripts/scripts/#{described_class}"
 
-  let(:file_name) { 'something.rb' }
-  let(:spec_file_name) { './spec/something_spec.rb' }
+  let(:file_name) { 'app/something.rb' }
+  let(:spec_file_name) { 'spec/something_spec.rb' }
 
   after(:all) do
     File.delete('spec/something_spec.rb') if File.exist?('spec/something_spec.rb')

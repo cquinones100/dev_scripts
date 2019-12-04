@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    dev_scripts (0.1.7)
+    dev_scripts (0.1.8)
 
 GEM
   remote: https://rubygems.org/

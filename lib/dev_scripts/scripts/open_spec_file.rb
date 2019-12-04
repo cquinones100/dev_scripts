@@ -17,7 +17,9 @@ DevScripts::Script.define_script :open_spec_file do
   end
 
   let(:file_path_without_extension) do
-    file_path.gsub('.rb', '')
+    file_path
+      .gsub(/\A\w+\//, '')
+      .gsub('.rb', '')
   end
 
   let(:found_file_path) do
@@ -30,7 +32,7 @@ DevScripts::Script.define_script :open_spec_file do
     if file_exists?
       found_file_path
     else
-      "./spec/#{file_path_without_extension}_spec.rb"
+      "spec/#{file_path_without_extension}_spec.rb"
     end
   end
 
@@ -38,7 +40,7 @@ DevScripts::Script.define_script :open_spec_file do
     require 'active_support/inflector'
 
     spec_file_path
-      .gsub(/.\/spec\/|_spec\.rb/, '')
+      .gsub(/\Aspec\/|_spec\.rb/, '')
       .split('/')
       .map(&:camelize)
       .join('::')
