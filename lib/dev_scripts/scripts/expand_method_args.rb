@@ -1,4 +1,5 @@
 require 'dev_scripts/script'
+require 'dev_scripts/support/expanded_method'
 require 'parser/current'
 
 DevScripts::Script.define_script :expand_method_args do

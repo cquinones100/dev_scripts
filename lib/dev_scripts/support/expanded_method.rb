@@ -19,6 +19,7 @@ module DevScripts
             self << '('
             self << "\n"
           end
+
           self << INDENT + string_arg(arg)
           self << "," unless index == args.length - 1
           self << "\n"
@@ -53,6 +54,18 @@ module DevScripts
             "'#{arg.children[-1]}'"
           when :block
             FlattenedMethod.new(ast_node: arg)
+          when :hash
+            arg.children.each_with_object('').with_index do |(arg_child, string), index|
+              string << INDENT if index > 0
+
+              string << string_arg(arg_child)
+              string << "," if index < arg.children.size - 1
+              string << "\n" if index < arg.children.size - 1
+            end
+          when :pair
+            "#{arg.children[0].children[0]}: #{string_arg(arg.children[1])}"
+          when :nil
+            "nil"
         end
       end
 

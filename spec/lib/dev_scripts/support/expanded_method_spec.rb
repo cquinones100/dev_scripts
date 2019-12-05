@@ -94,5 +94,24 @@ end
 
       it { is_expected.to eq expected_result.chomp }
     end
+
+    context 'when the method has keyword args' do
+      let(:line) do
+        "instance_double(described_class, run: nil, name: script_name, duplicate: nil)"
+      end
+
+      let(:expected_result) do
+        <<~RUBY
+          instance_double(
+            described_class,
+            run: nil,
+            name: script_name,
+            duplicate: nil
+          )
+        RUBY
+      end
+
+      it { is_expected.to eq expected_result.chomp }
+    end
   end
 end
