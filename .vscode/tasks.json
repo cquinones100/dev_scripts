@@ -12,6 +12,12 @@
       "type": "shell",
       "command": "dev_scripts expand_block ${relativeFile} ${lineNumber}",
       "problemMatcher": []
+    },
+    {
+      "label": "expand method arguments",
+      "type": "shell",
+      "command": "dev_scripts expand_method_args ${relativeFile} ${lineNumber}",
+      "problemMatcher": []
     }
   ]
 }
