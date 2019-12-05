@@ -44,6 +44,8 @@ module DevScripts
 
       def string_receiver
         return method_name.to_s if receiver.nil?
+
+        "#{receiver.children[-1].to_s}.#{method_name}"
       end
 
       def string_arg(arg)
@@ -68,6 +70,8 @@ module DevScripts
             "#{arg.children[0].children[0]}: #{string_arg(arg.children[1])}"
           when :nil
             "nil"
+          when :int
+            "#{arg.children[0]}"
         end
       end
 
@@ -116,6 +120,5 @@ module DevScripts
         end
       end
     end
-
   end
 end

@@ -7,7 +7,7 @@ RSpec.describe DevScripts::Support::ExpandedMethod do
   context 'when the method has no args' do
     let(:line) { "create" }
 
-    it { is_expected.to eq line }
+    it { is_expected.to eq line + "\n" }
   end
 
   context 'when the method is the only thing in the line' do
@@ -23,7 +23,7 @@ create(
     end
 
 
-    it { is_expected.to eq expected_result.chomp }
+    it { is_expected.to eq expected_result }
   end
 
   context 'when the method has a block arg' do
@@ -39,7 +39,7 @@ end
         RUBY
       end
 
-      it { is_expected.to eq expected_result.chomp }
+      it { is_expected.to eq expected_result }
     end
 
     context 'when the block arg is the only arg' do
@@ -52,7 +52,7 @@ end
         RUBY
       end
 
-      it { is_expected.to eq expected_result.chomp }
+      it { is_expected.to eq expected_result }
     end
 
     context 'when the method has nested methods as args' do
@@ -72,7 +72,7 @@ end
         RUBY
       end
 
-      it { is_expected.to eq expected_result.chomp }
+      it { is_expected.to eq expected_result }
     end
 
     context 'when the method has nested blocks as args' do
@@ -92,26 +92,26 @@ end
         RUBY
       end
 
-      it { is_expected.to eq expected_result.chomp }
+      it { is_expected.to eq expected_result }
     end
 
     context 'when the method has keyword args' do
       let(:line) do
-        "instance_double(described_class, run: nil, name: script_name, duplicate: nil)"
+        "create(:a_factory, total_views: 0, id: view.public_id, gender: 'female')"
       end
 
       let(:expected_result) do
         <<~RUBY
-          instance_double(
-            described_class,
-            run: nil,
-            name: script_name,
-            duplicate: nil
+          create(
+            :a_factory,
+            total_views: 0,
+            id: view.public_id,
+            gender: 'female'
           )
         RUBY
       end
 
-      it { is_expected.to eq expected_result.chomp }
+      it { is_expected.to eq expected_result }
     end
   end
 end
