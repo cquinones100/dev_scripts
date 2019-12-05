@@ -34,6 +34,8 @@ module DevScripts
           self << "\n"
           self << 'end'
         end
+
+        self << "\n"
       end
 
       private
